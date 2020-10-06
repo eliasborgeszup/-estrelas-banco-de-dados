@@ -29,12 +29,12 @@ WHERE c.cep = '33250000';
 
 SELECT c.* 
 FROM cidade c
-WHERE c.estado = 'SP' AND c.numero_habitantes > 5000;
+WHERE c.estado = 'SP' AND c.numero_habitantes > 100000;
 
 -- Exercicio 06
 SELECT c.nome
 FROM cidade c
-WHERE c.capital = true AND c.renda_per_capita > 30000;
+WHERE c.capital is true AND c.renda_per_capita > 30000;
 
 -- Exercicio 07
 SELECT c.nome, c.estado
@@ -42,15 +42,16 @@ FROM cidade c
 WHERE c.estado = 'SP';
 
 -- Exercicio 08
-SELECT e.regiao, c.estado, c.nome, c.numero_habitantes
+SELECT e.regiao, e.nome, c.nome, c.numero_habitantes
 FROM cidade c, estado e
-WHERE (c.estado = e.sigla)
-AND (c.renda_per_capita > 20.000 AND c.capital = false);
+WHERE c.estado = e.sigla
+AND c.renda_per_capita > 20.000 AND c.capital is false;
 
 -- Exercicio 09
 SELECT c.*
 FROM cidade c, estado e
-WHERE (c.estado = e.sigla) AND e.regiao = 'SUDESTE';
+WHERE c.estado = e.sigla
+AND e.regiao = 'SUDESTE';
 
 -- Exercicio 10
 INSERT INTO banco_estrelas.cidade (cep, nome, numero_habitantes, capital, estado, renda_per_capita, data_fundacao)
@@ -59,4 +60,4 @@ VALUES ('38392132', 'Santo Andre', 584.102, false, 'SP', 100034.39, 19700830);
 SELECT c.nome, c.numero_habitantes
 FROM cidade c, estado e
 WHERE (c.estado = e.sigla) 
-AND c.capital <> true AND e.regiao = 'SUDESTE' AND c.estado <> 'MG' AND c.renda_per_capita > 15.000;
+AND c.capital is false AND e.regiao = 'SUDESTE' AND c.estado <> 'MG' AND c.renda_per_capita > 15.000;
